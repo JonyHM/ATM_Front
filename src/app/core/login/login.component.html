@@ -1,0 +1,43 @@
+<section fxLayout="row wrap" fxLayoutAlign="center center" class="login-form">
+  <mat-card fxLayout="row" fxLayoutAlign="space-around center" class="img-form">
+
+    <div fxFlex="60" class="img">
+      <img src="../../../assets/img/ex-atm.jpg">
+    </div>
+
+    <mat-divider [vertical]="true" style="height:200px"></mat-divider>
+
+    <div class="form" fxLayout="column" fxLayoutAlign="center center" fxFlex="60">
+      <mat-card-title>Login</mat-card-title>
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()">
+
+        <mat-card-content fxLayout="column" fxLayoutAlign="space-around end">
+          <mat-form-field>
+            <input matInput placeholder="Email" type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && loginForm.get('email').errors }" />
+            <mat-error *ngIf="loginForm.get('email').invalid">{{ emailError }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Password" type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && loginForm.get('password').errors }" />
+            <mat-error *ngIf="loginForm.get('password').invalid">{{ passwordError }}</mat-error>
+          </mat-form-field>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <div class="form-group">
+              <button
+                [disabled]="loading"
+                mat-raised-button
+                color="accent"
+                fxFill
+              >Login</button>
+              <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          </div>
+          <div *ngIf="error">{{error}}</div>
+        </mat-card-actions>
+      </form>
+    </div>
+  </mat-card>
+</section>
