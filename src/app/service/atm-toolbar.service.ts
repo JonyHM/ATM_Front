@@ -34,7 +34,8 @@ export class AtmToolbarService {
         return{
           path: route.path,
           title: route.data.title,
-          icon: route.data.icon
+          icon: route.data.icon,
+          role: route.data.role
         };
       });
   }

@@ -20,15 +20,18 @@ export class AuthenticationService {
     return this.http.post<any>(API + '/auth', login)
       .pipe(map(user => {
         if (user && user.token) {
-          localStorage.setItem('user', JSON.stringify(user));
+          window.localStorage.setItem('user', JSON.stringify(user));
         }
-
+        window.localStorage.setItem('show', 'true');
         this.showMenuEmitter.emit(true);
         return user;
       }));
   }
 
   public logout() {
-    localStorage.removeItem('user');
+    window.localStorage.removeItem('user');
+    window.localStorage.removeItem('show');
+    window.localStorage.removeItem('role');
+    window.localStorage.removeItem('userName');
   }
 }

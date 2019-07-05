@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import * as jwt_decode from 'jwt-decode';
 
 import { BalanceService } from './../../../service/balance.service';
+import { User } from './../../../model/user';
 
 @Component({
   selector: 'app-atm-page',
@@ -14,7 +16,8 @@ export class AtmPageComponent implements OnInit {
   constructor(private balanceService: BalanceService) {}
 
   ngOnInit() {
-    this.balanceService.getBalance('jose.souza@bol.com')
+    const user: User = jwt_decode(window.localStorage.getItem('user'));
+    this.balanceService.getBalance(user.email)
       .subscribe(balance => {
         this.balance = balance.balance;
       });

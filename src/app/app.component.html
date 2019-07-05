@@ -8,23 +8,55 @@
             {{appName}}
       </mat-toolbar>
       <mat-nav-list>
-        <a *ngFor="let navItem of mainMenuItems"
-            mat-list-item
-            mat-ripple
-            [style.position]="'relative'"
-            routerLinkActive="selected"
-            [routerLink]="[navItem.path]">
-          <mat-icon *ngIf="navItem.icon">{{ navItem.icon }}</mat-icon>
-          <p>{{ navItem.title }}</p>
+        <a *ngFor="let navItem of mainMenuItems" mat-list-item mat-ripple [style.position]="'relative'"
+            routerLinkActive="selected" [routerLink]="shouldBeActiveLink(navItem.role) ? [navItem.path] : null">
+
+          <mat-icon *ngIf="navItem.role === 'ALL'; else elseIcon">{{ navItem.icon }}</mat-icon>
+          <ng-template #elseIcon>
+            <mat-icon *ngIf="navItem.role === this.role">{{ navItem.icon }}</mat-icon>
+          </ng-template>
+
+          <p *ngIf="navItem.role === 'ALL'; else elseTitle">{{ navItem.title }}</p>
+          <ng-template #elseTitle>
+            <p *ngIf="navItem.role === this.role">{{ navItem.title }}</p>
+          </ng-template>
         </a>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" *ngIf="this.isAuthenticated">
       <mat-icon (click)="mainSideNav.toggle()" *ngIf="mainSideNav.opened">chevron_left</mat-icon>
       <mat-icon (click)="mainSideNav.toggle()" *ngIf="!mainSideNav.opened">menu</mat-icon>
 
       {{ (activeMenuItem$ | async)?.title }}
+
+      <div fxFlex fxLayout fxLayoutAlign="end">
+
+        <dl fxLayout fxLayoutGap="20px">
+          <dd class="username">
+            {{ userName }}
+          </dd>
+
+          <dd class="user">
+            <button mat-icon-button
+              [matMenuTriggerFor]="menu">
+              <mat-icon>person_outline</mat-icon>
+            </button>
+            <mat-menu #menu>
+              <button mat-menu-item>
+                <mat-icon>settings</mat-icon>
+                <span>Settings</span>
+              </button>
+              <button mat-menu-item
+                (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Exit</span>
+              </button>
+            </mat-menu>
+          </dd>
+        </dl>
+      </div>
+
     </mat-toolbar>
-    <router-outlet></router-outlet>
+    <router-outlet (activate)="checkAuthentication()"></router-outlet>
   </mat-sidenav-container>
 </div>

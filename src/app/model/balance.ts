@@ -1,3 +1,3 @@
-export class Balance {
+export interface Balance {
   balance: number;
 }

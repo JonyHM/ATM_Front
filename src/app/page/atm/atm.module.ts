@@ -1,23 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AtmRoutingModule } from './atm-routing.module';
 import { AtmPageComponent } from './atm-page/atm-page.component';
 import { AppCommonModule } from './../../app-common/app-common.module';
 import { BalanceService } from './../../service/balance.service';
+import { AdminComponent } from './admin/admin.component';
+import { AccountService } from '../../service/account.service';
+import { BankService } from '../../service/bank.service';
 
 @NgModule({
   declarations: [
-    AtmPageComponent
+    AtmPageComponent,
+    AdminComponent
   ],
   imports: [
     CommonModule,
     AppCommonModule,
-    AtmRoutingModule
   ],
   exports: [
     AtmPageComponent
   ],
-  providers: [BalanceService]
+  providers: [
+    AccountService,
+    BankService,
+    BalanceService
+  ]
 })
 export class AtmModule { }

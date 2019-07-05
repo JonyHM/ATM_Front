@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AtmToolbarService } from './service/atm-toolbar.service';
-import { AtmRoutingModule } from './page/atm/atm-routing.module';
 import { AtmModule } from './page/atm/atm.module';
 import { AppCommonModule } from './app-common/app-common.module';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
@@ -20,7 +19,6 @@ import { CoreModule } from './core/core.module';
     AppCommonModule,
     AppRoutingModule,
     AtmModule,
-    AtmRoutingModule,
     BrowserModule,
     CoreModule
   ],
